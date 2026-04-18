@@ -1,0 +1,26 @@
+name: Build and Releas
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chekout
+        uses: actions/checkout@v4
+      
+      - name: Run buil script
+        run: ./scripts/build.sh
+        
+      - name: Comit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: updat install.sh"
+          file_pattern: "install.sh"
